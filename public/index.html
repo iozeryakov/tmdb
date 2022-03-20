@@ -2,13 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="%PUBLIC_URL%/fav.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Web site created using create-react-app"/>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -18,20 +15,536 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>The Movie Database (TMDB)</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.11.0/build/cssnormalize/cssnormalize-min.css">
   </head>
-  <body>
+  <body class="body">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <div class="wrapper" id="root">
+      <header class="header">
+        <div class="header-content">
+          <nav class="content-navigation">
+            <a class="content-navigation__logo" href="/">
+              <img src='./img/logo.svg' alt="The Movie Database (TMDB)" width="154" height="20"/>
+            </a>
+            <ul class="content-navigation__menu">
+              <li>
+                <a class="menu__item" href="./movies.html">
+                  Фильмы
+                </a>
+              </li>
+              <li>
+                <a class="menu__item" href="./movies.html">
+                  Сериалы
+                </a>
+              </li>
+              <li>
+                <a class="menu__item" href="#">
+                  Люди
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="content-search">
+            <form class="content-search__from">
+              <label>
+                <input class='search__input' type='text' autoComplete='off' placeholder='Найти фильм, сериал, персону......' />
+              </label>
+              <input  type='image' alt="Search" src='./img/search.svg' width='40px' height='40px'/>
+            </form>
+          </div>
+        </div>
+      </header>
+      
+      <main class="main">
+        <section class="main__section main__section_title">
+            <div class="section__wrapper">
+              <div class="main__title">
+                <h2 class="main__title_h2">Добро пожаловать.</h2>
+                <h3 class="main__title_h3">Миллионы фильмов, сериалов и людей. Исследуйте сейчас.</h3>
+              </div>
+            </div>
+        </section>
+        <section class="main__section">
+          <div class="section__wrapper">
+            <div class="section__content">
+              <div class="section__content_wrapper">
+                <div class="content__header">
+                  <h2 class="content__header_h2">Что популярно</h2>
+                  <div class="main-section__selector">
+                    <div class="selector__item selector__item_active">
+                      <h3 class="selector__item_h3">
+                        <a class="selector__item_a" href="#">
+                          Онлайн
+                        </a>
+                      </h3>
+                    </div>
+                    <div class="selector__item">
+                      <h3 class="selector__item_h3">
+                        <a class="selector__item_a" href="#">
+                          По ТВ
+                        </a>
+                      </h3>
+                    </div>
+                    <div class="selector__item">
+                      <h3 class="selector__item_h3">
+                        <a class="selector__item_a" href="#">
+                          Напрокат
+                        </a>
+                      </h3 class="selector__item_h3">
+                    </div>
+                    <div class="selector__item">
+                      <h3 class="selector__item_h3">
+                        <a class="selector__item_a" href="#">
+                          В кинотеатрах
+                        </a>
+                      </h3>
+                    </div>
+                  </div>      
+                </div>
+                <div class="content__scroller">
+                <div class="content__scroller_cards">
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="main__section">
+          <div class="section__wrapper">
+            <div class="section__content">
+              <div class="section__content_wrapper">
+                <div class="content__header">
+                  <h2 class="content__header_h2">Бесплатное</h2>
+                  <div class="main-section__selector">
+                    <div class="selector__item selector__item_active">
+                      <h3 class="selector__item_h3">
+                        <a class="selector__item_a" href="#">
+                          Фильмы
+                        </a>
+                      </h3>
+                    </div>
+                    <div class="selector__item">
+                      <h3 class="selector__item_h3">
+                        <a class="selector__item_a" href="#">
+                          Сериалы
+                        </a>
+                      </h3>
+                    </div>
+                  </div>      
+                </div>
+                <div class="content__scroller">
+                <div class="content__scroller_cards">
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="main__section">
+          <div class="section__wrapper">
+            <div class="section__content">
+              <div class="section__content_wrapper">
+                <div class="content__header">
+                  <h2 class="content__header_h2">В тренде</h2>
+                  <div class="main-section__selector">
+                    <div class="selector__item selector__item_active">
+                      <h3 class="selector__item_h3">
+                        <a class="selector__item_a" href="#">
+                          Сегодня
+                        </a>
+                      </h3>
+                    </div>
+                    <div class="selector__item">
+                      <h3 class="selector__item_h3">
+                        <a class="selector__item_a" href="#">
+                          На этой неделе
+                        </a>
+                      </h3>
+                    </div>
+                  </div>      
+                </div>
+                <div class="content__scroller">
+                <div class="content__scroller_cards">
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                  <div class="card1">
+                    <div class="card1__img">
+                      <a href="./film.html">
+                        <img class="card1__img_img" src="./img/2.jpg">
+                      </a> 
+                    </div>
+                    <div class="card1__title">
+                      <a class="card1__title_a"href="./film.html" title="Бэтмен">Бэтмен</a>
+                      <p class="card1__title_p">04 мар 2022</p>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <a class="footer__logo" href="/">
+            <img src="/img/logo-full.svg" alt="The Movie Database (TMDB)" width="130" height="94"/>
+        </a>
+        <div class='footer__info'>
+            <a>Data from</a>
+            <a href="https://developers.themoviedb.org/3/getting-started/introduction" >TMDB API</a>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
