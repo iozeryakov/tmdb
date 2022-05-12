@@ -15,10 +15,9 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Бэтмен (2022) - The Movie Database (TMDB)</title>
+    <title>Фильмы - The Movie Database (TMDB)</title>
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.11.0/build/cssnormalize/cssnormalize-min.css">
-    
   </head>
   <body class="body">
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -31,41 +30,47 @@
             </a>
             <ul class="content-navigation__menu">
               <li>
-                <a class="menu__item" href="./movies.html">
+                <a class="menu__item" href="./movies.html?type=movie">
                   Фильмы
                 </a>
               </li>
               <li>
-                <a class="menu__item" href="./movies.html">
+                <a class="menu__item" href="./movies.html?type=tv">
                   Сериалы
                 </a>
               </li>
-              <li>
-                <a class="menu__item" href="./people.html">
-                  Люди
-                </a>
-              </li>
+             
             </ul>
           </nav>
           <div class="content-search">
-            <form class="content-search__from">
-              <label>
-                <input class="search__input" type="text" autoComplete="off" placeholder="Найти фильм, сериал, персону......" />
-              </label>
-              <input  type="image" alt="Search" src="./img/search.svg" width="40px" height="40px"/>
+            <form class="content-search__from" action="./movies.html" method="get" >
+                <input name="search" class="search__input" type="text" autoComplete="off" placeholder="Найти по данному разделу..." />
+                <input class="hedden" name="type" type="hidden" value=""/>
+                <button class="search" type="submit">
+                  <img src="./img/search.svg" width="40px" height="40px">
+                </button>
             </form>
           </div>
         </div>
       </header>
       
       <main class="main"> 
+        <section class="main__section">
+            <div class="section__wrapper">
+                <div class="section__content">
+                    <div class="content__title">
+                        <h2 class="content__title_h2">Это учебный проект, выполненный в рамках курса для frontend разработчиков.</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
       </main>
       <footer class="footer">
         <a class="footer__logo" href="/">
             <img src="/img/logo-full.svg" alt="The Movie Database (TMDB)" width="130" height="94"/>
         </a>
         <div class="footer__info">
-            <a class="footer__a">Data from</a>
+            <a class="footer__a" >Data from</a>
             <a class="footer__a" href="https://developers.themoviedb.org/3/getting-started/introduction" >TMDB API</a>
         </div>
       </footer>
