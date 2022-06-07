@@ -1,23 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <p>
-//           Edit <code>src/App.tsx</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
+import { Route, Routes } from 'react-router-dom';
 
-// export default App;
+import { Main, Movies, Tv,Info } from './pages';
+
+export const App: FC = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Main />} />
+      <Route path="/movie" element={<Movies />} />
+      <Route path="/tv" element={<Tv />} />
+      <Route path="/info" element={<Info />} />
+    </Routes>
+  );
+};
