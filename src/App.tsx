@@ -1,8 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
-import { Main, Movies, Tv,Info } from './pages';
+import { Info } from "./pages/Info/Info";
+import { Tv } from "./pages/Tv/Tv";
+import { Main } from "./pages/Main/Main";
+import { Movies } from "./pages/Movies/Movies";
 
 export const App: FC = () => {
   return (

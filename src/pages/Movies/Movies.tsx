@@ -1,11 +1,9 @@
-import { FC } from 'react';
-import {MoviesLayout} from '../../layouts'
+import { FC } from "react";
+import { MoviesLayout } from "../../layouts/MoviesLayout/MoviesLayout";
 
 /**
  * Страница с фильмами
  */
 export const Movies: FC = () => {
-  return (
-    <MoviesLayout type='movie' name='Фильмы:'/>
-  )
-  };   
+  return <MoviesLayout type="movie" name="Фильмы:" />;
+};
