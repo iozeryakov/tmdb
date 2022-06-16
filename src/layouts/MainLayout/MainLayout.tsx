@@ -6,14 +6,19 @@ import "./MainLayout.css";
 interface IProps {
   children: ReactNode;
   onChangeValue?: (event: ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
 }
 /**
  * Макет для главной страницы
  */
-export const MainLayout: FC<IProps> = ({ children, onChangeValue }: IProps) => {
+export const MainLayout: FC<IProps> = ({
+  children,
+  onChangeValue,
+  value,
+}: IProps) => {
   return (
     <>
-      <Header onChangeValue={onChangeValue} />
+      <Header value={value} onChangeValue={onChangeValue} />
       <main className="main">{children}</main>
       <Footer />
     </>

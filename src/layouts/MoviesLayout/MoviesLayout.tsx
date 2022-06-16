@@ -1,16 +1,10 @@
-import React, {
-  FC,
-  useState,
-  useEffect,
-  ChangeEvent,
-  useRef,
-  useReducer,
-} from "react";
+import { FC, useState, useEffect, ChangeEvent, useRef } from "react";
 import { MainLayout } from "../MainLayout/MainLayout";
 import { APY_KEY, BASE_URL } from "../../urls/urls";
 import { ICard } from "../../types/ICard";
 import { Card2 } from "../../components/Card2/Card2";
-import axios from "axios";
+import { useLoading } from "../../hooks/useLoading";
+import { useScroll } from "../../hooks/useScroll";
 import "./MoviesLayout.css";
 
 interface IProp {
@@ -22,109 +16,71 @@ interface IProp {
  * Макет для второстепенных страниц
  */
 export const MoviesLayout: FC<IProp> = ({ type, name }: IProp) => {
-  const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState<ICard[]>([]);
   const [page, setPage] = useState(1);
-  const [count, setCount] = useState(20);
   const [method, setMethod] = useState(`/discover/${type}`);
   const [value, setValue] = useState("");
-  const [flag, setFlag] = useState(false);
-  const [text, setText] = useState(name);
   const ref = useRef(null);
-
+  const intersected = useScroll(ref, () => {
+    setPage((prevState) => prevState + 1);
+  });
+  const { data, loading } = useLoading<ICard[]>(
+    BASE_URL +
+      method +
+      `?query=${value}&${APY_KEY}&page=${page}&sort_by=popularity.desc&language=ru`
+  );
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setLoading(true);
-        }
-      },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1,
-      }
-    );
-    if (ref.current) {
-      observer.observe(ref.current);
+    console.log(page);
+    if (data) {
+      setMovies((prevState) => [...prevState, ...data]);
     }
-  }, [ref]);
-
+  }, [data]);
   useEffect(() => {
-    if (loading && page < 501 && count === 20) {
-      axios
-        .get(
-          BASE_URL +
-            method +
-            `?query=${value}&${APY_KEY}&page=${page}&sort_by=popularity.desc&language=ru`
-        )
-        .then((movie) => {
-          setMovies([...movies, ...movie.data.results]);
-          setPage((prevState) => prevState + 1);
-          setCount(movie.data.results.length);
-          setLoading(false);
-          if (movie.data.results.length === 0) {
-            setText(
-              (prevState) =>
-                prevState + ` нет результатов соответствующих запросу: ${value}`
-            );
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      setLoading(false);
-    }
-  }, [loading]);
-
-  useEffect(() => {
-    setText(name);
-    setCount(20);
     if (value && value.trim()) {
-      setPage(1);
       setMethod(`/search/${type}`);
-      setMovies([]);
-      setLoading(true);
-      // setFlag(true);
     } else {
-      //if(flag){
-      setPage(1);
       setMethod(`/discover/${type}`);
-      setMovies([]);
-      setLoading(true);
-      //setFlag(false);
-      //}
     }
-  }, [value]);
+    setMovies([]);
+    setPage(1);
+  }, [value, type]);
 
   const onChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
   return (
-    <MainLayout onChangeValue={onChangeValue}>
+    <MainLayout value={value} onChangeValue={onChangeValue}>
       <section className="main__section">
         <div className="section__wrapper">
           <div className="section__content">
             <div className="content__title">
-              <h2 className="content__title_h2">{text}</h2>
+              <h2 className="content__title_h2">
+                {loading
+                  ? "Загрузка..."
+                  : movies.length === 0
+                  ? name + " нет результатов по запросу:" + value
+                  : name}
+              </h2>
             </div>
             <div className="content">
               <div>
                 <div className="cards-wrapper">
                   <div className="cards">
                     {movies.map(
-                      ({
-                        id,
-                        title,
-                        poster_path,
-                        release_date,
-                        name,
-                        first_air_date,
-                      }) => {
+                      (
+                        {
+                          id,
+                          title,
+                          poster_path,
+                          release_date,
+                          name,
+                          first_air_date,
+                        },
+                        index
+                      ) => {
                         return (
                           <Card2
-                            key={id}
+                            key={index} //Приходится использовать, так как на сайте есть фильмы с одинаковым id.
                             id={id}
                             title={title ? title : name}
                             poster_path={poster_path}

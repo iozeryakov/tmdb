@@ -14,6 +14,7 @@ export const Card1: FC<ICard> = ({ id, title, poster_path, release_date }) => {
         <Link to="/info">
           <img
             className="card1__img_img"
+            alt={title}
             src={poster_path ? IMG_URL + poster_path : "/img/1.jpg"}
           />
         </Link>

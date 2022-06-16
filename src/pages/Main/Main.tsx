@@ -3,6 +3,8 @@ import axios from "axios";
 import { MainLayout } from "../../layouts/MainLayout/MainLayout";
 import { Card1 } from "../../components/Card1/Card1";
 import { APY_KEY, BASE_URL } from "../../urls/urls";
+import { useLoading } from "../../hooks/useLoading";
+import { ICard } from "../../types/ICard";
 import "./Main.css";
 
 /**
@@ -10,60 +12,40 @@ import "./Main.css";
  */
 export const Main: FC = () => {
   const [img, setImg] = useState("");
-  const [activeItem1, setActiveItem1] = useState("movie");
-  const [activeItem2, setActiveItem2] = useState("day");
-  const [movieTv, setMovieTv] = useState([]);
-  const [dayWeek, setDayWeek] = useState([]);
+  const [activeItem1, setActiveItem1] = useState<string>("movie");
+  const [activeItem2, setActiveItem2] = useState<string>("day");
+  const [method, setMethod] = useState<string>();
+  const [movieTv, setMovieTv] = useState<ICard[]>([]);
+  const [dayWeek, setDayWeek] = useState<ICard[]>([]);
 
+  const { data } = useLoading<ICard[]>(
+    BASE_URL + method + `?${APY_KEY}&language=ru`
+  );
   useEffect(() => {
-    const getMovies = async () => {
-      await axios
-        .get(BASE_URL + `/trending/all/day?${APY_KEY}&language=ru`)
-        .then((day) => {
+    if (data) {
+      if (method?.includes(activeItem1)) {
+        setMovieTv(data);
+        if (!img) {
           setImg(
             `url(https://image.tmdb.org/t/p/original${
-              day.data.results[Math.floor(Math.random() * (19 - 0 + 1)) + 0]
-                .backdrop_path
+              data[Math.floor(Math.random() * (19 - 0 + 1)) + 0].backdrop_path
             })`
           );
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    getMovies();
-  }, []);
-
+        }
+      } else if (method?.includes(activeItem2)) {
+        setDayWeek(data);
+      }
+    }
+  }, [data]);
   useEffect(() => {
-    const getMovies = async () => {
-      await axios
-        .get(
-          BASE_URL +
-            `/discover/${activeItem1}?sort_by=popularity.desc&${APY_KEY}&language=ru`
-        )
-        .then((movie) => {
-          setMovieTv(movie.data.results);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    getMovies();
+    setMethod(`/discover/${activeItem1}`);
   }, [activeItem1]);
 
   useEffect(() => {
-    const getMovies = async () => {
-      await axios
-        .get(BASE_URL + `/trending/all/${activeItem2}?${APY_KEY}&language=ru`)
-        .then((day) => {
-          setDayWeek(day.data.results);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    getMovies();
-  }, [activeItem2]);
+    if (movieTv.length !== 0) {
+      setMethod(`/trending/all/${activeItem2}`);
+    }
+  }, [activeItem2, movieTv]);
   return (
     <MainLayout>
       <section
@@ -125,16 +107,19 @@ export const Main: FC = () => {
               <div className="content__scroller">
                 <div id="popularity" className="content__scroller_cards">
                   {movieTv.map(
-                    ({
-                      id,
-                      title,
-                      poster_path,
-                      release_date,
-                      name,
-                      first_air_date,
-                    }) => (
+                    (
+                      {
+                        id,
+                        title,
+                        poster_path,
+                        release_date,
+                        name,
+                        first_air_date,
+                      },
+                      index
+                    ) => (
                       <Card1
-                        key={id}
+                        key={index} //Приходится использовать, так как на сайте есть фильмы с одинаковым id.
                         id={id}
                         title={title ? title : name}
                         poster_path={poster_path}

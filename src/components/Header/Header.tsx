@@ -4,12 +4,13 @@ import "./Header.css";
 
 interface IProps {
   onChangeValue?: (event: ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
 }
 
 /**
  *Компонент для отображения Header
  */
-export const Header: FC<IProps> = ({ onChangeValue }: IProps) => {
+export const Header: FC<IProps> = ({ onChangeValue, value }: IProps) => {
   const { pathname } = useLocation();
   return (
     <header className="header">
@@ -44,6 +45,7 @@ export const Header: FC<IProps> = ({ onChangeValue }: IProps) => {
                 type="text"
                 autoComplete="off"
                 placeholder="Найти по данному разделу..."
+                value={value}
                 onChange={onChangeValue}
               />
             </div>
