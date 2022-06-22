@@ -1,23 +1,19 @@
-import React from 'react';
+import React, { FC } from "react";
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <p>
-//           Edit <code>src/App.tsx</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
+import { Route, Routes } from "react-router-dom";
 
-// export default App;
+import { Info } from "./pages/Info/Info";
+import { Tv } from "./pages/Tv/Tv";
+import { Main } from "./pages/Main/Main";
+import { Movies } from "./pages/Movies/Movies";
+
+export const App: FC = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Main />} />
+      <Route path="/movie" element={<Movies />} />
+      <Route path="/tv" element={<Tv />} />
+      <Route path="/info" element={<Info />} />
+    </Routes>
+  );
+};

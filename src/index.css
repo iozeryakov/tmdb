@@ -1,0 +1,14 @@
+html,
+.body {
+  height: 100%;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 1em;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  color: rgb(78, 68, 68);
+}

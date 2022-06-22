@@ -1,0 +1,20 @@
+.footer {
+  flex-shrink: 0;
+  background-color: rgba(3, 37, 65, 1);
+  height: 160px;
+  max-width: 100%;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.footer__logo {
+  display: block;
+  width: 130px;
+  height: 94px;
+}
+.footer__a {
+  color: #fff;
+  font-weight: 600;
+}
