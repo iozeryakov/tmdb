@@ -24,13 +24,12 @@ export const MoviesLayout: FC<IProp> = ({ type, name }: IProp) => {
   const intersected = useScroll(ref, () => {
     setPage((prevState) => prevState + 1);
   });
-  const { data, loading } = useLoading<ICard[]>(
+  const { data, loading, error } = useLoading<ICard[]>(
     BASE_URL +
       method +
       `?query=${value}&${APY_KEY}&page=${page}&sort_by=popularity.desc&language=ru`
   );
   useEffect(() => {
-    console.log(page);
     if (data) {
       setMovies((prevState) => [...prevState, ...data]);
     }
@@ -66,31 +65,33 @@ export const MoviesLayout: FC<IProp> = ({ type, name }: IProp) => {
               <div>
                 <div className="cards-wrapper">
                   <div className="cards">
-                    {movies.map(
-                      (
-                        {
-                          id,
-                          title,
-                          poster_path,
-                          release_date,
-                          name,
-                          first_air_date,
-                        },
-                        index
-                      ) => {
-                        return (
-                          <Card2
-                            key={index} //Приходится использовать, так как на сайте есть фильмы с одинаковым id.
-                            id={id}
-                            title={title ? title : name}
-                            poster_path={poster_path}
-                            release_date={
-                              release_date ? release_date : first_air_date
-                            }
-                          />
-                        );
-                      }
-                    )}
+                    {error
+                      ? "Ошибка"
+                      : movies.map(
+                          (
+                            {
+                              id,
+                              title,
+                              poster_path,
+                              release_date,
+                              name,
+                              first_air_date,
+                            },
+                            index
+                          ) => {
+                            return (
+                              <Card2
+                                key={index} //Приходится использовать, так как на сайте есть фильмы с одинаковым id.
+                                id={id}
+                                title={title ? title : name}
+                                poster_path={poster_path}
+                                release_date={
+                                  release_date ? release_date : first_air_date
+                                }
+                              />
+                            );
+                          }
+                        )}
                   </div>
                   <div className="button" ref={ref}></div>
                 </div>

@@ -1,5 +1,4 @@
 import { FC, useState, useEffect } from "react";
-import axios from "axios";
 import { MainLayout } from "../../layouts/MainLayout/MainLayout";
 import { Card1 } from "../../components/Card1/Card1";
 import { APY_KEY, BASE_URL } from "../../urls/urls";
@@ -14,38 +13,25 @@ export const Main: FC = () => {
   const [img, setImg] = useState("");
   const [activeItem1, setActiveItem1] = useState<string>("movie");
   const [activeItem2, setActiveItem2] = useState<string>("day");
-  const [method, setMethod] = useState<string>();
-  const [movieTv, setMovieTv] = useState<ICard[]>([]);
-  const [dayWeek, setDayWeek] = useState<ICard[]>([]);
 
-  const { data } = useLoading<ICard[]>(
-    BASE_URL + method + `?${APY_KEY}&language=ru`
+  const dataMovieTv = useLoading<ICard[]>(
+    BASE_URL + `/discover/${activeItem1}?${APY_KEY}&language=ru`
+  );
+  const dataDayWeek = useLoading<ICard[]>(
+    BASE_URL + `/trending/all/${activeItem2}?${APY_KEY}&language=ru`
   );
   useEffect(() => {
-    if (data) {
-      if (method?.includes(activeItem1)) {
-        setMovieTv(data);
-        if (!img) {
-          setImg(
-            `url(https://image.tmdb.org/t/p/original${
-              data[Math.floor(Math.random() * (19 - 0 + 1)) + 0].backdrop_path
-            })`
-          );
-        }
-      } else if (method?.includes(activeItem2)) {
-        setDayWeek(data);
+    if (dataMovieTv.data) {
+      if (!img) {
+        setImg(
+          `url(https://image.tmdb.org/t/p/original${
+            dataMovieTv.data[Math.floor(Math.random() * (19 - 0 + 1)) + 0]
+              .backdrop_path
+          })`
+        );
       }
     }
-  }, [data]);
-  useEffect(() => {
-    setMethod(`/discover/${activeItem1}`);
-  }, [activeItem1]);
-
-  useEffect(() => {
-    if (movieTv.length !== 0) {
-      setMethod(`/trending/all/${activeItem2}`);
-    }
-  }, [activeItem2, movieTv]);
+  }, [dataMovieTv.data, img]);
   return (
     <MainLayout>
       <section
@@ -106,29 +92,31 @@ export const Main: FC = () => {
               </div>
               <div className="content__scroller">
                 <div id="popularity" className="content__scroller_cards">
-                  {movieTv.map(
-                    (
-                      {
-                        id,
-                        title,
-                        poster_path,
-                        release_date,
-                        name,
-                        first_air_date,
-                      },
-                      index
-                    ) => (
-                      <Card1
-                        key={index} //Приходится использовать, так как на сайте есть фильмы с одинаковым id.
-                        id={id}
-                        title={title ? title : name}
-                        poster_path={poster_path}
-                        release_date={
-                          release_date ? release_date : first_air_date
-                        }
-                      />
-                    )
-                  )}
+                  {dataMovieTv.error
+                    ? "Ошибка"
+                    : dataMovieTv.data?.map(
+                        (
+                          {
+                            id,
+                            title,
+                            poster_path,
+                            release_date,
+                            name,
+                            first_air_date,
+                          },
+                          index
+                        ) => (
+                          <Card1
+                            key={index} //Приходится использовать, так как на сайте есть фильмы с одинаковым id.
+                            id={id}
+                            title={title ? title : name}
+                            poster_path={poster_path}
+                            release_date={
+                              release_date ? release_date : first_air_date
+                            }
+                          />
+                        )
+                      )}
                 </div>
               </div>
             </div>
@@ -172,26 +160,28 @@ export const Main: FC = () => {
               </div>
               <div className="content__scroller">
                 <div id="trending" className="content__scroller_cards">
-                  {dayWeek.map(
-                    ({
-                      id,
-                      title,
-                      poster_path,
-                      release_date,
-                      name,
-                      first_air_date,
-                    }) => (
-                      <Card1
-                        key={id}
-                        id={id}
-                        title={title ? title : name}
-                        poster_path={poster_path}
-                        release_date={
-                          release_date ? release_date : first_air_date
-                        }
-                      />
-                    )
-                  )}
+                  {dataDayWeek.error
+                    ? "Ошибка"
+                    : dataDayWeek.data?.map(
+                        ({
+                          id,
+                          title,
+                          poster_path,
+                          release_date,
+                          name,
+                          first_air_date,
+                        }) => (
+                          <Card1
+                            key={id}
+                            id={id}
+                            title={title ? title : name}
+                            poster_path={poster_path}
+                            release_date={
+                              release_date ? release_date : first_air_date
+                            }
+                          />
+                        )
+                      )}
                 </div>
               </div>
             </div>
